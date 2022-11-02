@@ -13,6 +13,7 @@ interface InputProps {
   autoFocus: boolean;
   autoComplete: string;
   editable: boolean;
+  readOnly: boolean;
   activeDescendantId?: string;
   value: string;
   maxLength?: number;
@@ -43,6 +44,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     autoFocus,
     autoComplete,
     editable,
+    readOnly,
     activeDescendantId,
     value,
     maxLength,
@@ -99,7 +101,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     ...attrs,
     value: editable ? value : '',
     maxLength,
-    readOnly: !editable,
+    readOnly: readOnly,
     unselectable: !editable ? 'on' : null,
 
     style: { ...style, opacity: editable ? null : 0 },
