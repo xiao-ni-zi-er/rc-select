@@ -8,6 +8,7 @@ type InputRef = HTMLInputElement | HTMLTextAreaElement;
 interface InputProps {
   prefixCls: string;
   id: string;
+  fieldid?: string;
   inputElement: React.ReactElement;
   disabled: boolean;
   autoFocus: boolean;
@@ -38,6 +39,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   {
     prefixCls,
     id,
+    fieldid,
     inputElement,
     disabled,
     tabIndex,
@@ -83,6 +85,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
 
     // Override over origin props
     id,
+    fieldid,
     ref: composeRef(ref, originRef as any),
     disabled,
     tabIndex,

@@ -21,6 +21,8 @@ import { isValidateOpenKey } from '../utils/keyUtil';
 export interface InnerSelectorProps {
   prefixCls: string;
   id: string;
+  fieldid?: string;
+  onRenderRest?: (values: any[]) => void;
   mode: Mode;
 
   inputRef: React.Ref<HTMLInputElement | HTMLTextAreaElement>;
@@ -52,6 +54,7 @@ export interface RefSelectorProps {
 
 export interface SelectorProps {
   id: string;
+  fieldid?: string;
   prefixCls: string;
   showSearch?: boolean;
   open: boolean;
@@ -88,7 +91,8 @@ export interface SelectorProps {
   onSearchSubmit?: (searchText: string) => void;
   onRemove: (value: DisplayValueType) => void;
   onInputKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-
+  onRenderRest?: (values: any[]) => void;
+  onTagMouseDown?: React.MouseEventHandler<HTMLElement>;
   /**
    * @private get real dom for trigger align.
    * This may be removed after React provides replacement of `findDOMNode`
@@ -111,6 +115,8 @@ const Selector: React.RefForwardingComponent<RefSelectorProps, SelectorProps> = 
     onSearchSubmit,
     onToggleOpen,
     onInputKeyDown,
+    onRenderRest,
+    onTagMouseDown,
 
     domRef,
   } = props;
@@ -222,6 +228,7 @@ const Selector: React.RefForwardingComponent<RefSelectorProps, SelectorProps> = 
   };
 
   const onMouseDown: React.MouseEventHandler<HTMLElement> = (event) => {
+    if(onTagMouseDown) onTagMouseDown(event);
     const inputMouseDown = getInputMouseDown();
 
     // when mode is combobox, don't prevent default behavior
@@ -247,6 +254,7 @@ const Selector: React.RefForwardingComponent<RefSelectorProps, SelectorProps> = 
     onInputPaste,
     onInputCompositionStart,
     onInputCompositionEnd,
+    onRenderRest,
   };
 
   const selectNode =
