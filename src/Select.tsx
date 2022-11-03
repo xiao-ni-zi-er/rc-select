@@ -193,7 +193,8 @@ const Select = React.forwardRef(
       defaultValue,
       labelInValue,
       onChange,
-
+      onRenderRest,
+      onTagMouseDown,
       ...restProps
     } = props;
 
@@ -575,6 +576,8 @@ const Select = React.forwardRef(
         onActiveValue,
         defaultActiveFirstOption: mergedDefaultActiveFirstOption,
         onSelect: onInternalSelect,
+        onRenderRest: onRenderRest,
+        onTagMouseDown: onTagMouseDown,
         menuItemSelectedIcon,
         rawValues,
         fieldNames: mergedFieldNames,
@@ -597,6 +600,8 @@ const Select = React.forwardRef(
       listHeight,
       listItemHeight,
       childrenAsData,
+      onRenderRest,
+      onTagMouseDown,
     ]);
 
     // ========================== Warning ===========================

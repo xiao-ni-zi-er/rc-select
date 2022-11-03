@@ -31,6 +31,8 @@ const DEFAULT_OMIT_PROPS = [
   'onInputKeyDown',
   'onPopupScroll',
   'tabIndex',
+  'onRenderRest',
+  'onTagMouseDown'
 ] as const;
 
 export type RenderNode = React.ReactNode | ((props: any) => React.ReactNode);
@@ -194,6 +196,8 @@ export interface BaseSelectProps extends BaseSelectPrivateProps, React.AriaAttri
   onKeyUp?: React.KeyboardEventHandler<HTMLDivElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLDivElement>;
   onMouseDown?: React.MouseEventHandler<HTMLDivElement>;
+  onTagMouseDown?: React.MouseEventHandler<HTMLElement>;
+  onRenderRest?: (values: any[]) => void;
   onPopupScroll?: React.UIEventHandler<HTMLDivElement>;
   onInputKeyDown?: React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
@@ -276,6 +280,8 @@ const BaseSelect = React.forwardRef((props: BaseSelectProps, ref: React.Ref<Base
     onKeyUp,
     onKeyDown,
     onMouseDown,
+    onRenderRest,
+    onTagMouseDown,
 
     // Rest Props
     ...restProps
@@ -778,6 +784,8 @@ const BaseSelect = React.forwardRef((props: BaseSelectProps, ref: React.Ref<Base
           onSearch={onInternalSearch}
           onSearchSubmit={onInternalSearchSubmit}
           onRemove={onSelectorRemove}
+          onRenderRest={onRenderRest}
+          onTagMouseDown={onTagMouseDown}
           tokenWithEnter={tokenWithEnter}
         />
       )}

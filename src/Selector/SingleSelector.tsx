@@ -14,6 +14,7 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
     inputElement,
     prefixCls,
     id,
+    fieldid= props.fieldid ? props.fieldid + '_search_input' : '',
     inputRef,
     disabled,
     autoFocus,
@@ -94,6 +95,7 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
           ref={inputRef}
           prefixCls={prefixCls}
           id={id}
+          fieldid={fieldid}
           open={open}
           inputElement={inputElement}
           disabled={disabled}
