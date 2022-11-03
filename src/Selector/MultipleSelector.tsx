@@ -40,6 +40,7 @@ const onPreventMouseDown = (event: React.MouseEvent) => {
 const SelectSelector: React.FC<SelectorProps> = (props) => {
   const {
     id,
+    fieldid = props.fieldid ? props.fieldid + '_search_input' : '',
     prefixCls,
 
     values,
@@ -70,6 +71,7 @@ const SelectSelector: React.FC<SelectorProps> = (props) => {
     onInputMouseDown,
     onInputCompositionStart,
     onInputCompositionEnd,
+    onRenderRest,
   } = props;
 
   const measureRef = React.useRef<HTMLSpanElement>(null);
@@ -170,6 +172,7 @@ const SelectSelector: React.FC<SelectorProps> = (props) => {
   }
 
   function renderRest(omittedValues: DisplayValueType[]) {
+    if(onRenderRest) onRenderRest(omittedValues);
     const content =
       typeof maxTagPlaceholder === 'function'
         ? maxTagPlaceholder(omittedValues)
@@ -195,11 +198,13 @@ const SelectSelector: React.FC<SelectorProps> = (props) => {
         open={open}
         prefixCls={prefixCls}
         id={id}
+        fieldid={fieldid}
         inputElement={null}
         disabled={disabled}
         autoFocus={autoFocus}
         autoComplete={autoComplete}
         editable={inputEditable}
+        readOnly={!inputEditable}
         activeDescendantId={activeDescendantId}
         value={inputValue}
         onKeyDown={onInputKeyDown}
