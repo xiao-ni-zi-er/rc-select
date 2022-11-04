@@ -106,6 +106,7 @@ export interface SelectProps<ValueType = any, OptionType extends BaseOptionType 
   extends BaseSelectPropsWithoutPrivate {
   prefixCls?: string;
   id?: string;
+  fieldid?: string;
 
   backfill?: boolean;
 
@@ -623,6 +624,8 @@ const Select = React.forwardRef(
           searchValue={mergedSearchValue}
           onSearch={onInternalSearch}
           onSearchSplit={onInternalSearchSplit}
+          onRenderRest={onRenderRest}
+          onTagMouseDown={onTagMouseDown}
           dropdownMatchSelectWidth={dropdownMatchSelectWidth}
           // >>> OptionList
           OptionList={OptionList}
