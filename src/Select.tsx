@@ -106,6 +106,7 @@ export interface SelectProps<ValueType = any, OptionType extends BaseOptionType 
   extends BaseSelectPropsWithoutPrivate {
   prefixCls?: string;
   id?: string;
+  fieldid?: string;
 
   backfill?: boolean;
 
@@ -574,8 +575,6 @@ const Select = React.forwardRef(
         onActiveValue,
         defaultActiveFirstOption: mergedDefaultActiveFirstOption,
         onSelect: onInternalSelect,
-        onRenderRest: onRenderRest,
-        onTagMouseDown: onTagMouseDown,
         menuItemSelectedIcon,
         rawValues,
         fieldNames: mergedFieldNames,
@@ -598,8 +597,6 @@ const Select = React.forwardRef(
       listHeight,
       listItemHeight,
       childrenAsData,
-      onRenderRest,
-      onTagMouseDown,
     ]);
 
     // ========================== Warning ===========================
@@ -628,6 +625,8 @@ const Select = React.forwardRef(
           searchValue={mergedSearchValue}
           onSearch={onInternalSearch}
           onSearchSplit={onInternalSearchSplit}
+          onRenderRest={onRenderRest}
+          onTagMouseDown={onTagMouseDown}
           dropdownMatchSelectWidth={dropdownMatchSelectWidth}
           // >>> OptionList
           OptionList={OptionList}
