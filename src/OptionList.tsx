@@ -46,6 +46,7 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
     toggleOpen,
     notFoundContent,
     onPopupScroll,
+    fieldid,
   } = useBaseProps();
   const {
     flattenOptions,
@@ -334,6 +335,8 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
           return (
             <div
               {...pickAttrs(passedProps)}
+              fieldid={fieldid ? `${fieldid}_option_${itemIndex}` : undefined}
+              id={otherProps.id ? otherProps.id : `${id}_option_${itemIndex}`}
               aria-selected={selected}
               className={optionClassName}
               title={optionTitle}
