@@ -172,7 +172,7 @@ const SelectSelector: React.FC<SelectorProps> = (props) => {
   }
 
   function renderRest(omittedValues: DisplayValueType[]) {
-    if(onRenderRest) onRenderRest(omittedValues);
+    if (onRenderRest) onRenderRest(omittedValues);
     const content =
       typeof maxTagPlaceholder === 'function'
         ? maxTagPlaceholder(omittedValues)
@@ -204,7 +204,6 @@ const SelectSelector: React.FC<SelectorProps> = (props) => {
         autoFocus={autoFocus}
         autoComplete={autoComplete}
         editable={inputEditable}
-        readOnly={!inputEditable}
         activeDescendantId={activeDescendantId}
         value={inputValue}
         onKeyDown={onInputKeyDown}
