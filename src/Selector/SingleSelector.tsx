@@ -42,26 +42,12 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
   const [inputChanged, setInputChanged] = React.useState(false);
 
   const combobox = mode === 'combobox';
-  const inputEditable = combobox || showSearch || !mode;
-  // combobox和showSearch模式下input框可输入，其他模式均为readonly
-  const inputReadOnly = !(combobox || showSearch)
+  const inputEditable = combobox || showSearch;
   const item = values[0];
 
   let inputValue: string = searchValue || '';
   if (combobox && activeValue && !inputChanged) {
     inputValue = activeValue;
-  }
-  // 支持默认非检索模式下input框value有值（只兼容label是非节点内容）string | number | bool | 文本数组['text1', 'text2]
-  if (!mode && item && item.label && !showSearch) { // string | number | bool | ReactElement
-    if (typeof item.label !== 'object') { // string | number | bool
-      inputValue = item.label.toString();
-    }
-    if (typeof item.label === 'object' && !React.isValidElement(item.label)
-    && Array.isArray(item.label) && !item.label.find(el => React.isValidElement(el))) { // 文本数组['text1', 'text2]
-      item.label.forEach(el => {
-        inputValue = inputValue + el.toString();
-      })
-    }
   }
 
   React.useEffect(() => {
@@ -70,8 +56,8 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
     }
   }, [combobox, activeValue]);
 
-  // Not show text when closed expect combobox mode | mode is undefind
-  const hasTextInput = !!mode && mode !== 'combobox' && !open && !showSearch ? false : !!inputValue;
+  // Not show text when closed expect combobox mode
+  const hasTextInput = mode !== 'combobox' && !open && !showSearch ? false : !!inputValue;
 
   // Get title
   const title = getTitle(item);
@@ -102,7 +88,6 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
           autoFocus={autoFocus}
           autoComplete={autoComplete}
           editable={inputEditable}
-          readOnly={inputReadOnly}
           activeDescendantId={activeDescendantId}
           value={inputValue}
           onKeyDown={onInputKeyDown}
