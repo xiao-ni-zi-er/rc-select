@@ -125,7 +125,6 @@ export type BaseSelectPropsWithoutPrivate = Omit<BaseSelectProps, keyof BaseSele
 export interface BaseSelectProps extends BaseSelectPrivateProps, React.AriaAttributes {
   className?: string;
   style?: React.CSSProperties;
-  fieldid?: string;
   showSearch?: boolean;
   tagRender?: (props: CustomTagProps) => React.ReactElement;
   direction?: 'ltr' | 'rtl';
