@@ -16,6 +16,7 @@ interface InputProps {
   editable: boolean;
   activeDescendantId?: string;
   value: string;
+  copyValue: any;
   maxLength?: number;
   open: boolean;
   tabIndex: number;
@@ -56,6 +57,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     onCompositionEnd,
     open,
     attrs,
+    copyValue = '',
   },
   ref,
 ) => {
@@ -100,12 +102,12 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     'aria-controls': `${id}_list`,
     'aria-activedescendant': activeDescendantId,
     ...attrs,
-    value: editable ? value : '',
+    value: editable && !!value ? value : copyValue,
     maxLength,
     readOnly: !editable,
-    unselectable: !editable ? 'on' : null,
+    unselectable: !editable || !copyValue ? 'on' : null,
 
-    style: { ...style, opacity: editable ? null : 0 },
+    style: { ...style, opacity: editable || !!copyValue ? null : 0 },
 
     onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
       onKeyDown(event);

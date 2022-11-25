@@ -108,6 +108,8 @@ export interface SelectProps<ValueType = any, OptionType extends BaseOptionType 
   id?: string;
   fieldid?: string;
 
+  setInputCopyValue?: (item: any, inputValue?: string) => any;
+
   backfill?: boolean;
 
   // >>> Field Names

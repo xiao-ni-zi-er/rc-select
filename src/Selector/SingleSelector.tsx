@@ -7,6 +7,7 @@ import { getTitle } from '../utils/commonUtil';
 interface SelectorProps extends InnerSelectorProps {
   inputElement: React.ReactElement;
   activeValue: string;
+  setInputCopyValue?: (item: any, inputValue?: string) => any;
 }
 
 const SingleSelector: React.FC<SelectorProps> = (props) => {
@@ -14,7 +15,7 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
     inputElement,
     prefixCls,
     id,
-    fieldid= props.fieldid ? props.fieldid + '_search_input' : '',
+    fieldid = props.fieldid ? props.fieldid + '_search_input' : '',
     inputRef,
     disabled,
     autoFocus,
@@ -37,6 +38,7 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
     onInputPaste,
     onInputCompositionStart,
     onInputCompositionEnd,
+    setInputCopyValue,
   } = props;
 
   const [inputChanged, setInputChanged] = React.useState(false);
@@ -74,6 +76,7 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
     );
   };
 
+  const copyValue = setInputCopyValue && setInputCopyValue(item, inputValue);
   return (
     <>
       <span className={`${prefixCls}-selection-search`}>
@@ -90,6 +93,7 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
           editable={inputEditable}
           activeDescendantId={activeDescendantId}
           value={inputValue}
+          copyValue={copyValue}
           onKeyDown={onInputKeyDown}
           onMouseDown={onInputMouseDown}
           onChange={(e) => {
@@ -107,7 +111,11 @@ const SingleSelector: React.FC<SelectorProps> = (props) => {
 
       {/* Display value */}
       {!combobox && item && !hasTextInput && (
-        <span className={`${prefixCls}-selection-item`} title={title}>
+        <span
+          style={{ opacity: !!copyValue ? 0 : null }}
+          className={`${prefixCls}-selection-item`}
+          title={title}
+        >
           {item.label}
         </span>
       )}
